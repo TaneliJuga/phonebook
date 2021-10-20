@@ -5,6 +5,8 @@ Palvelimen REST-rajapinnan kuvaus:
 - Palvelimeen on määritelty resurssi nimeltä "contact" joka vastaa puhelinluettelossa olevaa henkilötietoa.
 - Resurssi sijaitsee reitissä /api
 - Kaikki tieto palautetaan JSON-formaatissa
+- Contact-resurssi sisältää kolme kenttää: id, name, number. 
+- Palvelin lukee sille lähetetyn JSON-tiedon kentät name ja number.
 
 Kutsut:
 
