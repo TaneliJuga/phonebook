@@ -7,17 +7,23 @@ Palvelimen REST-rajapinnan kuvaus:
 - Kaikki tieto palautetaan JSON-formaatissa
 
 Kutsut:
-- kutsu: GET /api/contacts
-- kuvaus: palauttaa taulukon kaikista henkilötiedoista
 
-- kutsu: GET /api/contacts/:id
-- kuvaus: palauttaa parametriä id vastaavan henkilötiedon.
+- GET /api/contacts
 
-- kutsu: POST /api/contacts/
-- kuvaus: Lisää kutsun body-kentässä olevan JSON-muotoisen henkilötiedon palvelimelle.
+kuvaus: palauttaa taulukon kaikista henkilötiedoista
 
-- kutsu: DELETE /api/contacts/:id
-- kuvaus: Poistaa parametriä id vastaavan henkilötiedon.
+- GET /api/contacts/:id
 
-- kutsu: PUT /api/contacts/:id
-- kuvaus: Muokkaa parametriä id vastaavan henkilötiedon kutsun body-kentässä olevan JSON-muotoisen arvojen mukaisiksi.
+kuvaus: palauttaa parametriä id vastaavan henkilötiedon.
+
+- POST /api/contacts/
+
+kuvaus: Lisää kutsun body-kentässä olevan JSON-muotoisen henkilötiedon palvelimelle.
+
+- DELETE /api/contacts/:id
+
+Poistaa parametriä id vastaavan henkilötiedon.
+
+- PUT /api/contacts/:id
+
+Muokkaa parametriä id vastaavan henkilötiedon kutsun body-kentässä olevan JSON-muotoisen arvojen mukaisiksi.
