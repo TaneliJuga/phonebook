@@ -156,13 +156,16 @@ const Contacts = ({contacts, removeContact, updateContact}) => {
     })
 
     return (
+    <div>
         <div>
-            {
-                showForm && (
-                    <UpdateForm selectedContacts={contactsToUpdate}
-                    updateContact={updateContact}></UpdateForm>
-                )
-            }
+        {
+            showForm && (
+                <UpdateForm selectedContacts={contactsToUpdate}
+                updateContact={updateContact}></UpdateForm>
+            )
+        }
+    </div>
+    <div className={'table-container'}>
             <table>
             <caption>Contacts</caption>
           <thead>
@@ -198,10 +201,13 @@ const Contacts = ({contacts, removeContact, updateContact}) => {
               }
           </tbody>
         </table>
-        <RemoveButton  selectedContacts={selectedContacts}
-        removeContact={removeContact}/>
-        {updateButton}
+        <div className={'actions'}>
+            <RemoveButton  selectedContacts={selectedContacts}
+            removeContact={removeContact}/>
+            {updateButton}
         </div>
+    </div>
+    </div>
           )
 }
 
