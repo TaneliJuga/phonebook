@@ -2,7 +2,7 @@
 Simppeli puhelinluettelo-sovellus react-frontendillä ja express backendillä.
 
 Palvelimen REST-rajapinnan kuvaus:
-- Palvelimeen on määritelty resurssi contact joka vastaa puhelinluettelossa olevaa henkilötietoa.
+- Palvelimeen on määritelty resurssi nimeltä "contact" joka vastaa puhelinluettelossa olevaa henkilötietoa.
 - Resurssi sijaitsee reitissä /api
 - Kaikki tieto palautetaan JSON-formaatissa
 
