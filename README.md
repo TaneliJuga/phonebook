@@ -26,4 +26,4 @@ Poistaa parametriä id vastaavan henkilötiedon.
 
 - PUT /api/contacts/:id
 
-Muokkaa parametriä id vastaavan henkilötiedon kutsun body-kentässä olevan JSON-muotoisen arvojen mukaisiksi.
+kuvaus: Muokkaa parametriä id vastaavan henkilötiedon kutsun body-kentässä olevan JSON-muotoisen arvojen mukaisiksi.
