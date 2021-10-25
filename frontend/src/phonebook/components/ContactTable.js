@@ -1,4 +1,6 @@
 import {React, useState} from 'react'
+import UpdateForm from './UpdateForm'
+import {fields} from '../Contact'
 import '../phonebook.css'
 
 const RemoveButton = ({selectedContacts, removeContact}) => {
@@ -15,9 +17,12 @@ const RemoveButton = ({selectedContacts, removeContact}) => {
     )
 }
 
-const Component = ({contacts, removeContact, updateContact, fields}) => {
-    const [selectedContacts, setSelectedContacts] = useState([]);
-
+const ContactTable = ({contacts, removeContact, updateContact}) => {
+    const [selectedRows, setSelectedRows] = useState([]);
+    const [showUpdateForm, setShowUpdateForm] = useState(false);
+    const selectedContacts = selectedRows.map(id => {
+        return contacts.find(contact => contact.id == id)
+    }).filter(contact => contact !== undefined)
 
     function formatHeader(text){
         const first = text.slice(0, 1);
@@ -27,24 +32,45 @@ const Component = ({contacts, removeContact, updateContact, fields}) => {
 
     function getRowClickHandler(id){
         return () => {
-            const index = selectedContacts.indexOf(id);
+            const index = selectedRows.indexOf(id);
             const isSelected = index !== -1;
 
             if(isSelected){
-                const copy = selectedContacts.slice();
+                const copy = selectedRows.slice();
                 copy.splice(index, 1);
-                setSelectedContacts(copy);
+                setSelectedRows(copy);
             }else{
-                setSelectedContacts([
-                    ...selectedContacts,
+                setSelectedRows([
+                    ...selectedRows,
                     id
                 ]);
             }
         }
     }
 
+    const toggleUpdate = () => {
+        setShowUpdateForm(!showUpdateForm); 
+    }
+
+    const buttonText = showUpdateForm ? 'cancel' : 'update';
+    const canUpdate = selectedContacts.length > 0;
+    const showForm = canUpdate && showUpdateForm;
+
+    const updateButton = (
+        <button onClick={toggleUpdate}>{buttonText}</button>
+    )
+
     return (
+    <div>
         <div>
+        {
+            showForm && (
+                <UpdateForm selectedContacts={selectedContacts}
+                updateContact={updateContact}></UpdateForm>
+            )
+        }
+    </div>
+    <div className={'table-container'}>
             <table>
             <caption>Contacts</caption>
           <thead>
@@ -62,7 +88,7 @@ const Component = ({contacts, removeContact, updateContact, fields}) => {
               {
                 contacts.map((contact) => {
                     const {id} = contact;
-                    const isSelected = selectedContacts.indexOf(id) !== -1;
+                    const isSelected = selectedRows.indexOf(id) !== -1;
                     const className = isSelected ? 'checked' : '';
                   return (
                   <tr key={id} className={className}
@@ -80,10 +106,15 @@ const Component = ({contacts, removeContact, updateContact, fields}) => {
               }
           </tbody>
         </table>
-        <RemoveButton  selectedContacts={selectedContacts}
-        removeContact={removeContact}/>
+        <div className={'actions'}>
+            <RemoveButton  selectedContacts={selectedContacts}
+            removeContact={removeContact}/>
+            {updateButton}
         </div>
+    </div>
+    </div>
           )
 }
 
-export default Component
+
+export default ContactTable
