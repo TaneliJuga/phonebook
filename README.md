@@ -1,6 +1,8 @@
 # phonebook
 Simppeli puhelinluettelo-sovellus react-frontendillä ja express backendillä.
 
+Testi versio pyörimässä herokussa osoitteessa: https://blooming-garden-43710.herokuapp.com/
+
 Palvelimen REST-rajapinnan kuvaus:
 - Palvelimeen on määritelty resurssi nimeltä "contact" joka vastaa puhelinluettelossa olevaa henkilötietoa.
 - Resurssi sijaitsee reitissä /api
