@@ -31,6 +31,8 @@ app.use(cors())
 app.use(express.json())
 app.use(logger)
 
+app.use(express.static('build'))
+
 app.get('/api/contacts', (request, response) => {
     Contact.find({}).then(result => {
         response.json(result)

@@ -38,7 +38,6 @@ const ContactForm = ({addContact}) => {
     )
 }
 
-
 const App = () => {
     const [contacts, setContacts] = useState([]);
     useEffect(() => {
@@ -47,7 +46,7 @@ const App = () => {
 
     function updateContacts() {
         axios.
-        get('http://localhost:3001/api/contacts')
+        get('/api/contacts')
         .then(response => {
             setContacts(response.data);
         })
@@ -55,7 +54,7 @@ const App = () => {
 
     const addContact = (contact) => {
         const promise = axios.
-        post('http://localhost:3001/api/contacts', contact)
+        post('/api/contacts', contact)
         .then(response => {
             updateContacts();
         })
@@ -65,7 +64,7 @@ const App = () => {
     const removeContact = (contact) => {
         const id = contact.id;
         const promise = axios.
-        delete(`http://localhost:3001/api/contacts/${id}`)
+        delete(`/api/contacts/${id}`)
         .then(response => {
             updateContacts();
         })
@@ -77,7 +76,7 @@ const App = () => {
         const {id} = contact;
 
         const promise = axios.
-        put(`http://localhost:3001/api/contacts/${id}`, contact)
+        put(`/api/contacts/${id}`, contact)
         .then(response => {
             updateContacts();
         })
