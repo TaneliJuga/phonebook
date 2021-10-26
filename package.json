@@ -1,0 +1,22 @@
+{
+  "name": "phonebook-app",
+  "dependencies": {
+    "backend": "./backend"
+  },
+  "version": "0.0.1",
+  "description": "Phonebook webapp with react frontend and express backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaneliJuga/phonebook.git"
+  },
+  "author": "Taneli Juga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TaneliJuga/phonebook/issues"
+  },
+  "homepage": "https://github.com/TaneliJuga/phonebook#readme"
+}
