@@ -10,7 +10,7 @@ const ContactForm = ({addContact}) => {
     const inputs = getInputs(values, setValues);
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log(values);
+        //console.log(values);
         addContact(values).then(contact => {
             setValues(initialState);
         })

@@ -1,43 +1,9 @@
 import {React, useState, useEffect} from 'react'
 import InputWithLabel from './InputWithLabel'
 import '../phonebook.css'
+import {inputs} from '../Contact'
 
-function getTextValue(value, event){
-    return event.target.value;
-}
-
-const inputs = [
-    [
-        'name', 
-        ['value', ''], 
-        'text',
-        getTextValue
-    ],
-    [
-        'number', 
-        ['value', ''], 
-        'text',
-        getTextValue
-    ]
-].map(([name, [stateAttribute, initialValue], type, getValue]) => {
-    return {
-        name,
-        stateAttribute: {
-            name: stateAttribute,
-            initialValue
-        },
-        type,
-        getValue
-    }
-})
-
-const fields = inputs.map(({name}) => {
-    return {
-        key: name
-    }
-})
-
-function getInputs2(state, setState){
+function getInputs(state, setState){
     return inputs
     .map((input) => {
         const {name, getValue} = input;
@@ -71,7 +37,8 @@ function copyContact(values, contact){
     return copy;
 } 
 
-const UpdateForm = ({selectedContacts, updateContact}) => {
+const UpdateForm = ({selectedContacts, updateContact, 
+    onSuccessfullUpdate, allContacts}) => {
     const initialState = selectedContacts.reduce( (state, contact) => {
        state[contact.id] = initState(contact);
        return state; 
@@ -82,9 +49,12 @@ const UpdateForm = ({selectedContacts, updateContact}) => {
         const value = values[contact.id];
         const copy = copyContact(value, contact);
         
-        updateContact(copy);
+        updateContact(copy)
+        .then(result => {
+            onSuccessfullUpdate();
+        })
     }
-    const inputs = getInputs2(values, setValues);
+    const inputs = getInputs(values, setValues);
     const onSubmit = (e) => {
         e.preventDefault();
         selectedContacts.forEach(contact => {

@@ -3,6 +3,16 @@ import UpdateForm from './UpdateForm'
 import {fields} from '../Contact'
 import '../phonebook.css'
 
+//A button that will be disabled when no contacts are selected
+const TableActionButton = ({selectedContacts, text, ...rest}) => {
+    const disabled = selectedContacts.length === 0;
+
+    return (
+        <button {...rest} disabled={disabled}>{text}</button>
+    )
+}
+
+
 const RemoveButton = ({selectedContacts, removeContact}) => {
     const onClick = () => {
         selectedContacts.forEach(contact => {
@@ -10,10 +20,24 @@ const RemoveButton = ({selectedContacts, removeContact}) => {
         })
     }
 
-    const disabled = selectedContacts.length === 0;
+    return (
+        <TableActionButton 
+        onClick={onClick}
+        selectedContacts={selectedContacts}
+        text={'Remove'}/>
+    )
+}
+
+const UpdateButton = ({selectedContacts, text, onClick}) => {
+
+    const props = {
+        selectedContacts,
+        text,
+        onClick
+    }
 
     return (
-        <button onClick={onClick} disabled={disabled}>Remove</button>
+        <TableActionButton {...props}/>
     )
 }
 
@@ -48,7 +72,11 @@ const ContactTable = ({contacts, removeContact, updateContact}) => {
         }
     }
 
-    const toggleUpdate = () => {
+    const onSuccessfullUpdate = () => {
+        setShowUpdateForm(false); 
+    }
+
+    const handleUpdateClick = () => {
         setShowUpdateForm(!showUpdateForm); 
     }
 
@@ -56,17 +84,14 @@ const ContactTable = ({contacts, removeContact, updateContact}) => {
     const canUpdate = selectedContacts.length > 0;
     const showForm = canUpdate && showUpdateForm;
 
-    const updateButton = (
-        <button onClick={toggleUpdate}>{buttonText}</button>
-    )
-
     return (
     <div>
         <div>
         {
             showForm && (
                 <UpdateForm selectedContacts={selectedContacts}
-                updateContact={updateContact}></UpdateForm>
+                updateContact={updateContact}
+                onSuccessfullUpdate={onSuccessfullUpdate}></UpdateForm>
             )
         }
     </div>
@@ -107,9 +132,15 @@ const ContactTable = ({contacts, removeContact, updateContact}) => {
           </tbody>
         </table>
         <div className={'actions'}>
-            <RemoveButton  selectedContacts={selectedContacts}
-            removeContact={removeContact}/>
-            {updateButton}
+            <RemoveButton 
+                selectedContacts={selectedContacts}
+                removeContact={removeContact}
+            />
+            <UpdateButton 
+                selectedContacts={selectedContacts}
+                onClick={handleUpdateClick} 
+                text={buttonText} 
+            />
         </div>
     </div>
     </div>
